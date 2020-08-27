@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-us">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,42 +20,44 @@
 
 <body>
     <header class="logo text-center bg-dark"><!-- style with css -->
-        <img src="./assets/img/hackers-poulette-logo.png" alt="hackers-poulette-logo" class="img-fluid" style="max-height: 250px;">
+        <img src="./assets/img/hackers-poulette-logo.png" alt="Logo de hackers poulette" class="img-fluid" style="max-height: 250px;">
     </header>
 
     <!-- Bootstrap container -->
     <main class="container form">
 
-        <h2 class="text-center">Form :</h2>
+        <h1 class="text-center">Form :</h1>
 
         <form action="" method="POST" class="row justify-content-center" > <!-- add action to php (/action_page.php)-->
         
-            <div class="form-group col-2">
-                <label for="male" class="radio-inline"><input type="radio" name="optradio" value="male"> Mr</label>
-                <label for="female" class="radio-inline"><input type="radio" name="optradio" value="female"> Ms</label>
-            </div>
+            <fieldset class="form-group col-2">
+                <legend></legend><label>Gender :</label>
+                <label>Mr <input type="radio" name="optradio" value="mr"></label>
+                <label>Ms <input type="radio" name="optradio" value="ms"></label>
+                
+            </fieldset>
 
-            <div class="form-group col-4 ">
+            <label class="form-group col-4 ">Firstname :
               <input type="text" name="firstname" id="firstname" class="form-control" placeholder="Firstname">
-            </div>
+            </label>
 
-            <div class="form-group col-4">
+            <label class="form-group col-4">Lastname :
               <input type="text" name="lastname" id="lastname" class="form-control" placeholder="Lastname">
-            </div>
+            </label>
 
             <!-- Force next columns to break to new line -->
             <div class="w-100"></div>
 
-            <div class="form-group col-4 offset-2">
+            <label class="form-group col-4 offset-2">Email Address :
                 <input type="email" class="form-control" id="email" name="email" placeholder="Email address">
-            </div>
+            </label>
 
             <!-- avoided method
             <div class="form-group col-4">
                 <select name="country" id="country" class="bfh-selectbox bfh-countries" data-country="US" data-flags="true" defaul="select a country"></select>
             </div> -->
 
-            <div class="form-group col-4">
+            <label class="form-group col-4">Country :
                 <select id="country" name="country" class="form-control"class="dropdown-menu">
                 <option value="--select a country--">--select a country--</option>
         <option value="Åland Islands">Åland Islands</option>
@@ -76,7 +78,7 @@
                 </select>
                 <div class="valid-feedback">Valid.</div>
                 <div class="invalid-feedback">Please fill out this field.</div>
-            </div>
+            </label>
 
             <!-- Force next columns to break to new line -->
             <div class="w-100"></div>
@@ -90,9 +92,9 @@
                 </select>
             </div>
 
-            <div class="form-group col-4">
+            <label class="form-group col-4">Your message :
                 <textarea name="message" id="message" style="width: 100%; max-width: 100%;" placeholder="Write your message" rows="3"></textarea>
-            </div>
+            </label>
 
             <!-- Force next columns to break to new line -->
             <div class="w-100"></div>
