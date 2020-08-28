@@ -100,7 +100,7 @@ function test_input($data) {
         <h1 class="text-center">Form :</h1>
 
 
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" class="row justify-content-center" > <!-- add action to php (/action_page.php)-->
+        <form action="sendmail.php" method="POST" class="row justify-content-center" > <!-- add action to php (/action_page.php)-->
         
             <fieldset class="form-group col-2">
                 <legend></legend><label>Gender :</label>
