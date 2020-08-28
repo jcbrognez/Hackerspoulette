@@ -1,5 +1,7 @@
 <?php
 
+include_once("home.html");
+
 // declare variables
 $firstname = $lastname = $gender = $email = $country = $subject = $message = "";
 $firstnameErr = $lastnameErr = $genderErr = $emailErr = $countryErr = $subjectErr = $messageErr = "";
