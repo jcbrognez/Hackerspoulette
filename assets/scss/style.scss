@@ -2,21 +2,54 @@
     font-family: "Bellota serif ";
     src : url("../font/Bellota-Regular.otf");
 }
-
 /*
 colors: #0d8187, #FFF, #303030
 */
 
-// header .img
+body {
+    background-color: #FFF;
+    color: #303030;
+    font-family: 'Bellota serif', serif, sans-serif;
+    main {
+        margin: 6vh 0;
+        h1 {
+            font-size: 2em;
+            font-style: bold;
+            font-weight: 600;
+            color: #0d8187;
+        }
+        form {
+            margin-top: 5vh;
+            label {
+                font-size: 1em;
+                font-style: normal;
+            }
+        }
+    }
+}
 
-/* body
-.h2
+header {
+    border-bottom: 5px solid #0d8187;
+    img {
+        max-width: 250px;
+        max-height: 250px;
+        margin: -10px;
+    }
+}
+
+/*
+.error {
+    color: red;
+}
+.validate {
+    color: green;
+}
+*/
+
+
+/*
 .form
 .input
 .error
 .validate
-
-...
 */
-
-//

@@ -1,0 +1,59 @@
+@font-face {
+  font-family: "Bellota serif ";
+  src: url("../font/Bellota-Regular.otf");
+}
+
+/*
+colors: #0d8187, #FFF, #303030
+*/
+body {
+  background-color: #FFF;
+  color: #303030;
+  font-family: 'Bellota serif', serif, sans-serif;
+}
+
+body main {
+  margin: 6vh 0;
+}
+
+body main h1 {
+  font-size: 2em;
+  font-style: bold;
+  font-weight: 600;
+  color: #0d8187;
+}
+
+body main form {
+  margin-top: 5vh;
+}
+
+body main form label {
+  font-size: 1em;
+  font-style: normal;
+}
+
+header {
+  border-bottom: 5px solid #0d8187;
+}
+
+header img {
+  max-width: 250px;
+  max-height: 250px;
+  margin: -10px;
+}
+
+/*
+.error {
+    color: red;
+}
+.validate {
+    color: green;
+}
+*/
+/*
+.form
+.input
+.error
+.validate
+*/
+/*# sourceMappingURL=style.css.map */
