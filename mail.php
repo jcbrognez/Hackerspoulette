@@ -29,9 +29,9 @@ try {
 
     // Content
     $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Subject = 'Contact with the user :'.$subject;
-    $mail->Body    = 'This is the message we received from :'.$email.'<br>'.$message;
-    $mail->AltBody = 'Personal informations of the user :<br>'.$firstname.' '.$lastname.'<br>Gender :'.$gender.'<br>Country :'.$country;
+    $mail->Subject = 'Contact with the user. Subject : '.$subject;
+    $mail->Body    = 'This is the message we received from :'.$email.'<br>'.$message.'<br><br>Personal information of he user :<br>'.$firstname.' '.$lastname.'<br>Gender :'.$gender.'<br>Country :'.$country;
+    $mail->AltBody = '';
 
     $mail->send();
     echo 'Message has been sent';
