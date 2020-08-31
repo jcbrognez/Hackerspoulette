@@ -72,7 +72,7 @@ function test_input($data) {
             $errors = $messageErr;
         } else {
             $message = test_input($_POST['message']);
-            if (!preg_match("/^[a-zA-Z-' ]*$/",$message)) {
+            if (!filter_var($message, FILTER_SANITIZE_STRING)) {
                 $messageErr = "Only letters and white spaces allowed";
                 $errors = $messageErr;
             }
