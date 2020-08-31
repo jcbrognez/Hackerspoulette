@@ -1,11 +1,15 @@
 <?php
-  $dest = $email;
-  $sujet = "Email of confirmation";
+  $dest = "jcbrognez@gmail.com";
+  $subj = "Email of confirmation";
   $corp = "Hello, we have received your message.";
-  $headers = "From: VotreGmailId@gmail.com";
-  if (mail($dest, $sujet, $corp, $headers)) {
-    echo "Email sent with success to $dest ...";
+  $headers = "From: hackers@poulette.com";
+
+  if (mail($dest, $subj, $corp, $headers)) {
+    echo "Email envoyé avec succès à $dest ...";
   } else {
-    echo "Failure of sending email ...";
+    echo "Échec de l'envoi de l'email...";
   }
+  // mail ($to, $subj, $corp, $headers);
+  // echo "Email sent with success to $to ...";
+
 ?>

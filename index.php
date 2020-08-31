@@ -1,11 +1,12 @@
 <?php
-
-include_once("home.html");
+//session_start(); //starting session here to collect the $_SESSION variable (error and succes) 
 
 // declare variables
 $firstname = $lastname = $gender = $email = $country = $subject = $message = "";
 $firstnameErr = $lastnameErr = $genderErr = $emailErr = $countryErr = $subjectErr = $messageErr = "";
-
+$errors = "";
+$emailSuccess = $emailFailed = "";
+//$errors = $_SESSION['errors'];
 // function to remove characters & sanitize
 function test_input($data) {
     $data = trim($data);
@@ -18,56 +19,78 @@ function test_input($data) {
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (empty($_POST["firstname"])) {
             $firstnameErr = "Firstname is required";
+            $errors = $firstnameErr;
         } else {
             $firstname = test_input($_POST['firstname']);
             //check if only letters and spaces
             if (!preg_match("/^[a-zA-Z-' ]*$/",$firstname)) {
-                $firstnameErr = "Only letters and white space allowed";
+                $firstnameErr = "Only letters and white spaces allowed";
+                $errors = $firstnameErr;
             }
         }
     
         if (empty($_POST["lastname"])) {
             $lastnameErr = "Lastname is required";
+            $errors = $lastnameErr;
         } else {
             $lastname = test_input($_POST['lastname']);
             if (!preg_match("/^[a-zA-Z-' ]*$/",$lastname)) {
-                $lastnameErr = "Only letters and white space allowed";
+                $lastnameErr = "Only letters and white spaces allowed";
+                $errors = $lastnameErr;
             }
         }
     
-        if (empty($_POST["gender"])) {
+        if (empty($_POST["optradio"])) {
             $genderErr = "Gender is required";
+            $errors = $genderErr;
         } else {
-            $gender = test_input($_POST['gender']);
+            $gender = test_input($_POST['optradio']);
         }
         
         if (empty($_POST["email"])) {
             $emailErr = "Email is required";
+            $errors = $emailErr;
         } else {
             $email = test_input($_POST['email']);
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $emailErr = "Invalid email format";
+                $errors = $emailErr;
             }
         }
     
-        if (empty($_POST["country"])) {
+        if ($_POST["country"] == "--select a country--") {
             $countryErr = "Country is required";
+            $errors = $countryErr;
         } else {
             $country = test_input($_POST['country']);
         }
     
-        if (empty($_POST["subject"])) {
-            $subjectErr = "Subject is required";
-        }
+        $subject = test_input($_POST['subject']); // not required
     
-        if (empty($_POST["message"])) { // not obligatory
-            $message = "";
+        if (empty($_POST["message"])) {
+            $messageErr = "Message is required";
+            $errors = $messageErr;
         } else {
             $message = test_input($_POST['message']);
+            if (!preg_match("/^[a-zA-Z-' ]*$/",$message)) {
+                $messageErr = "Only letters and white spaces allowed";
+                $errors = $messageErr;
+            }
         }
     }
 
 
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        if(empty($errors)){ //if no error collected
+            require "mail.php";
+            //redirecting
+            header('location:confirm.php');
+        
+        } else{//if some error collected
+        
+            $emailFailed = "Failed to send the message.";
+        }
+    }
 
 ?>
 
@@ -102,7 +125,7 @@ function test_input($data) {
         <h1 class="text-center">Form :</h1>
 
 
-        <form action="sendmail.php" method="POST" class="row justify-content-center" > <!-- add action to php (/action_page.php)-->
+        <form action="" method="POST" class="row justify-content-center" > <!-- add action to php (/action_page.php)-->
         
             <fieldset class="form-group col-2">
                 <legend></legend><label>Gender :</label>
@@ -115,28 +138,24 @@ function test_input($data) {
                 <?php if (isset($gender) && $gender=="ms") echo "checked";?>
                 value="ms"></label>
 
-                <span class="error">* <?php echo $genderErr;?></span>
+                <span class="error" style="color: red;">* <?php echo $genderErr;?></span>
             </fieldset>
 
             <label class="form-group col-4 ">Firstname :
-              <input type="text" name="firstname" id="firstname" class="form-control" placeholder="Firstname" value="<?php echo $firstname;?>"><span class="error">* <?php echo $firstnameErr;?></span>
+              <input type="text" name="firstname" id="firstname" class="form-control" placeholder="Firstname" value="<?php echo $firstname;?>"><span class="error" style="color: red;">* <?php echo $firstnameErr;?></span>
             </label>
 
             <label class="form-group col-4">Lastname :
-              <input type="text" name="lastname" id="lastname" class="form-control" placeholder="Lastname" value="<?php echo $lastname;?>"><span class="error">* <?php echo $lastnameErr;?></span>
+              <input type="text" name="lastname" id="lastname" class="form-control" placeholder="Lastname" value="<?php echo $lastname;?>"><span class="error" style="color: red;">* <?php echo $lastnameErr;?></span>
             </label>
 
             <!-- Force next columns to break to new line -->
             <div class="w-100"></div>
 
             <label class="form-group col-4 offset-2">Email Address :
-                <input type="email" class="form-control" id="email" name="email" placeholder="Email address" value="<?php echo $email;?>"><span class="error">* <?php echo $emailErr;?></span>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Email address" value="<?php echo $email;?>"><span class="error" style="color: red;">* <?php echo $emailErr;?></span>
             </label>
 
-            <!-- avoided method (bootstrap-select-country)
-            <div class="form-group col-4">
-                <select name="country" id="country" class="bfh-selectbox bfh-countries" data-country="US" data-flags="true" defaul="select a country"></select>
-            </div> -->
             <label class="form-group col-4">Country :
                 <select id="country" name="country" class="form-control"class="dropdown-menu">
                     <option value="--select a country--">--select a country--</option>
@@ -158,6 +177,7 @@ function test_input($data) {
                 </select>
                 <div class="valid-feedback">Valid.</div>
                 <div class="invalid-feedback">Please fill out this field.</div>
+                <span class="error" style="color: red;">* <?php echo $countryErr;?></span>
             </label>
 
             <!-- Force next columns to break to new line -->
@@ -168,23 +188,29 @@ function test_input($data) {
                 <select name="subject" id="subject">
                     <option value="subject1">Subject 1</option>
                     <option value="subject2">Subject 2</option>
-                    <option value="other">Other</option>
+                    <option value="other" selected>Other</option>
                 </select>
             </div>
 
             <label class="form-group col-4">Your message :
-                <textarea name="message" id="message" style="width: 100%; max-width: 100%;" placeholder="Write your message" rows="3">
+                <textarea name="message" id="message" style="width: 100%; max-width: 100%;" rows="3">
                 <?php echo $message;?>
                 </textarea>
+                <span class="error" style="color: red;">* <?php echo $messageErr;?></span>
             </label>
 
             <!-- Force next columns to break to new line -->
             <div class="w-100"></div>
 
             <button type="submit" class="btn btn-default" name="submit">Submit Form</button>
-
+            
         </form>
 
+        <!-- display error to the user-->
+        <p class="text-center">
+            <span class="error" style="color: red;"> <?php echo $emailFailed;?></span>
+        </p>
+        
     </main>
 
     <footer></footer>
