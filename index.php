@@ -2,8 +2,8 @@
 //session_start(); //starting session here to collect the $_SESSION variable (error and succes) 
 
 // declare variables
-$firstname = $lastname = $gender = $email = $country = $subject = $message = "";
-$firstnameErr = $lastnameErr = $genderErr = $emailErr = $countryErr = $subjectErr = $messageErr = "";
+$firstname = $lastname = $gender = $email = $country = $subject = $message = $trick = "";
+$firstnameErr = $lastnameErr = $genderErr = $emailErr = $countryErr = $subjectErr = $messageErr = $trickErr = "";
 $errors = "";
 $emailSuccess = $emailFailed = "";
 //$errors = $_SESSION['errors'];
@@ -17,6 +17,11 @@ function test_input($data) {
     
     //VALIDATION
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        if (!empty($_POST['trick'])) {
+            $trickErr = "spam";
+            $errors = $trickErr;
+        }
+
         if (empty($_POST["firstname"])) {
             $firstnameErr = "Firstname is required";
             $errors = $firstnameErr;
@@ -126,6 +131,8 @@ function test_input($data) {
 
 
         <form action="" method="POST" class="row justify-content-center" > <!-- add action to php (/action_page.php)-->
+
+            <input type="text" name="trick" class="trick" require>
         
             <fieldset class="form-group col-2">
                 <legend></legend><label>Gender :</label>

@@ -41,4 +41,8 @@ header img {
   max-height: 250px;
   margin: -10px;
 }
+
+.trick {
+  display: none;
+}
 /*# sourceMappingURL=style.css.map */
