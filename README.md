@@ -1,8 +1,8 @@
 # Hacker Poulette
 
-![Hackers Poulette Logo](./assets/img/hackers-poulette-logo.png)
-
 Creation of a contact form for a website called Hackers Poulette.
+
+![Hackers Poulette Logo](./assets/img/hackers-poulette-logo.png)
 
 ![Hackers Poulette Form](./assets/img/HackersForm.jpg)
 
